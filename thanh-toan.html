@@ -381,7 +381,7 @@
           </div>
           <div class="meta-row">
             <span>Phí vận chuyển:</span>
-            <span style="color: #16a34a; font-weight: 500;">Miễn phí (Giao 2H)</span>
+            <span style="color: #16a34a; font-weight: 500;">Miễn phí</span>
           </div>
           <div class="meta-row total-row">
             <span>TỔNG TIỀN THANH TOÁN:</span>
@@ -511,9 +511,21 @@
       btn.innerText = "Đang kiểm tra giao dịch...";
       btn.disabled = true;
       box.style.display = "block";
+
+      // Lưu thời gian thực lúc bấm xác nhận
+      var now = new Date();
+      var day = String(now.getDate()).padStart(2, '0');
+      var month = String(now.getMonth() + 1).padStart(2, '0');
+      var year = now.getFullYear();
+      var hours = String(now.getHours()).padStart(2, '0');
+      var mins = String(now.getMinutes()).padStart(2, '0');
+      var secs = String(now.getSeconds()).padStart(2, '0');
+      var exactTime = day + '/' + month + '/' + year + ' ' + hours + ':' + mins + ':' + secs;
+      localStorage.setItem('paymentRecordedTime', exactTime);
+
       setTimeout(function() {
-        window.location.href = "hoa-don-s25.html";
-      }, 1200);
+        window.location.href = "hoa-don.html";
+      }, 800);
     }
   </script>
 </body>

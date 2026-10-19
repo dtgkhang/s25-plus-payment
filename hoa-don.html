@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hóa đơn thanh toán thành công #DH-S25-89421</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #1e293b;
+      background-color: #f1f5f9;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header cuộn bình thường, không dính */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #cbd5e1;
+      position: static;
+    }
+    .header-inner {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: #64748b;
+      display: block;
+      margin-top: 1px;
+    }
+    .header-contact {
+      font-size: 12px;
+      color: #475569;
+      text-align: right;
+    }
+    .header-contact a {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    /* Khung nội dung */
+    .main-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 14px 12px 30px 12px;
+    }
+
+    /* Khối thông báo thành công trang nhã */
+    .success-banner {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .success-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #16a34a;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .success-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .success-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.45;
+    }
+
+    /* Thẻ Card chi tiết */
+    .card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .card-header {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-body {
+      padding: 14px;
+    }
+
+    /* Danh sách hàng giá trị */
+    .info-table {
+      width: 100%;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .info-lbl {
+      color: #64748b;
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .info-val {
+      flex: 1;
+      text-align: right;
+      font-weight: 500;
+      color: #0f172a;
+    }
+
+    /* Khối sản phẩm */
+    .prod-box {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .prod-img {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 2px;
+      object-fit: contain;
+      flex-shrink: 0;
+      background: #fff;
+    }
+    .prod-meta {
+      flex: 1;
+    }
+    .prod-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.35;
+    }
+    .prod-desc {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .prod-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+
+    /* Tổng kết tiền */
+    .total-block {
+      border-top: 1px solid #e2e8f0;
+      margin-top: 10px;
+      padding-top: 10px;
+      font-size: 13px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      color: #64748b;
+    }
+    .total-final {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 6px;
+      padding-top: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .total-money {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Trạng thái giao dịch */
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+    }
+
+    /* Nút in & điều hướng */
+    .action-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn-action {
+      flex: 1;
+      padding: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-print {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+    }
+    .btn-print:active {
+      background: #f1f5f9;
+    }
+    .btn-back {
+      background: #0f172a;
+      border: 1px solid #0f172a;
+      color: #ffffff;
+    }
+    .btn-back:active {
+      background: #1e293b;
+    }
+
+    /* Chân trang */
+    .site-footer {
+      border-top: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 20px 14px;
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .action-group, .header-contact {
+        display: none !important;
+      }
+      .card, .success-banner {
+        border: 1px solid #000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header không sticky -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <div class="brand-title">TECHSTORE VIỆT NAM</div>
+        <span class="brand-sub">Hệ thống phân phối điện thoại chính hãng</span>
+      </div>
+      <div class="header-contact">
+        CSKH: <a href="tel:18002097">1800 2097</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+
+    <!-- Thông báo kết quả giao dịch -->
+    <div class="success-banner">
+      <div class="success-icon">✓</div>
+      <h1 class="success-title">Thanh toán thành công</h1>
+      <p class="success-desc">
+        Hệ thống đã nhận đủ số tiền và tự động khớp lệnh đơn hàng. Nhân viên TechStore sẽ liên hệ giao máy trong ít phút.
+      </p>
+    </div>
+
+    <!-- Khối 1: Thông tin thanh toán ngân hàng -->
+    <div class="card">
+      <div class="card-header">
+        <span>Giao dịch thanh toán</span>
+        <span class="status-badge">Đã thanh toán</span>
+      </div>
+      <div class="card-body">
+        <div class="info-table">
+          <div class="info-row">
+            <div class="info-lbl">Mã đơn hàng:</div>
+            <div class="info-val"><b>#DH-S25-89421</b></div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Mã chuẩn chi (Napas):</div>
+            <div class="info-val" style="font-family: monospace;">TCB-FT26291884920</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Thời gian ghi nhận:</div>
+            <div class="info-val">18/10/2026 09:35:12</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Hình thức:</div>
+            <div class="info-val">Chuyển khoản Techcombank (VietQR / Napas 247)</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Số tiền đã nhận:</div>
+            <div class="info-val" style="font-weight: 700; color: #0f172a;">14.600.000 đ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Khối 2: Thông tin người nhận hàng -->
+    <div class="card">
+      <div class="card-header">
+        <span>Thông tin nhận hàng</span>
+        <span style="font-size: 12px; color: #16a34a; font-weight: 500;">Giao hỏa tốc 2H</span>
+      </div>
+      <div class="card-body">
+        <div class="info-table">
+          <div class="info-row">
+            <div class="info-lbl">Người nhận:</div>
+            <div class="info-val"><b>Gia Khang</b></div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Số điện thoại:</div>
+            <div class="info-val">0338148702</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Địa chỉ nhận máy:</div>
+            <div class="info-val" style="max-width: 65%;">295 Tân Kỳ Tân Quý, Phường Tân Sơn Nhì, TP. Hồ Chí Minh</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Ghi chú vận chuyển:</div>
+            <div class="info-val">Kiểm tra máy ngoại quan và củ sạc trước khi ký nhận</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Khối 3: Sản phẩm đặt mua -->
+    <div class="card">
+      <div class="card-header">
+        <span>Chi tiết sản phẩm & Bảo hành</span>
+      </div>
+      <div class="card-body">
+        
+        <div class="prod-box">
+          <img 
+            src="s25-plus.jpg" 
+            alt="Samsung Galaxy S25 Plus"
+            class="prod-img"
+          />
+          <div class="prod-meta">
+            <div class="prod-name">Samsung Galaxy S25+ 5G (12GB / 256GB) — Likenew 99%</div>
+            <div class="prod-desc">Màu Xám Titan (Marble Gray) • Tình trạng máy đẹp nguyên bản 99% • Kèm củ sạc 25W chính hãng</div>
+            <div class="prod-price">14.600.000 đ (Số lượng: 1)</div>
+          </div>
+        </div>
+
+        <div class="total-block">
+          <div class="total-row">
+            <span>Tiền hàng:</span>
+            <span>14.600.000 đ</span>
+          </div>
+          <div class="total-row">
+            <span>Bảo Hành Vàng 12 Tháng:</span>
+            <span style="color: #16a34a; font-weight: 500;">Tặng kèm (0 đ)</span>
+          </div>
+          <div class="total-row">
+            <span>Phí vận chuyển hỏa tốc:</span>
+            <span style="color: #16a34a; font-weight: 500;">Miễn phí (0 đ)</span>
+          </div>
+          <div class="total-final">
+            <span>TỔNG THANH TOÁN:</span>
+            <span class="total-money">14.600.000 đ</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Nút thao tác -->
+    <div class="action-group">
+      <button class="btn-action btn-print" onclick="window.print()">In phiếu thu</button>
+      <a href="thanh-toan-s25.html" class="btn-action btn-back">Quay lại trang thanh toán</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div style="font-weight: 600; color: #334155; margin-bottom: 3px;">CÔNG TY CỔ PHẦN BÁN LẺ KỸ THUẬT SỐ TECHSTORE</div>
+    <div style="margin-bottom: 2px;">Mã số doanh nghiệp: 0108928372 do Sở KH&ĐT TP. Hà Nội cấp</div>
+    <div style="margin-bottom: 2px;">Chi nhánh TP.HCM: 295 Tân Kỳ Tân Quý, P. Tân Sơn Nhì, TP. Hồ Chí Minh</div>
+    <div>Tổng đài hỗ trợ: 1800 2097 (8h00 - 21h30 hàng ngày)</div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thanh toán đơn hàng #89421 - TechStore</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #1e293b;
+      background-color: #f1f5f9;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header cuộn bình thường, không dính màn hình (Không stick) */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #cbd5e1;
+      position: static; /* Không stick */
+    }
+    .header-inner {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: #64748b;
+      display: block;
+      margin-top: 1px;
+    }
+    .header-contact {
+      font-size: 12px;
+      color: #475569;
+      text-align: right;
+    }
+    .header-contact a {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    /* Khung nội dung */
+    .main-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 14px 12px 30px 12px;
+    }
+
+    /* Trạng thái đơn hàng thực tế */
+    .status-bar {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .status-text {
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    /* Khối thẻ thông tin */
+    .card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .card-header {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-body {
+      padding: 14px;
+    }
+
+    /* Sản phẩm */
+    .prod-box {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .prod-img {
+      width: 64px;
+      height: 64px;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 2px;
+      object-fit: contain;
+      flex-shrink: 0;
+      background: #fff;
+    }
+    .prod-meta {
+      flex: 1;
+    }
+    .prod-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.35;
+    }
+    .prod-desc {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .prod-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+
+    /* Thông tin giao nhận */
+    .meta-list {
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      color: #475569;
+    }
+    .meta-row.total-row {
+      border-top: 1px solid #e2e8f0;
+      margin-top: 6px;
+      padding-top: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .meta-row.total-row .total-money {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* KHU VỰC QR THANH TOÁN THỰC TẾ */
+    .qr-container {
+      text-align: center;
+      padding: 16px 14px;
+    }
+    .qr-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .qr-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+
+    .qr-box {
+      display: inline-block;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+    .qr-box img {
+      width: 210px;
+      height: 210px;
+      display: block;
+      margin: 0 auto;
+    }
+    .qr-save-link {
+      display: inline-block;
+      font-size: 12px;
+      color: #2563eb;
+      font-weight: 500;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      background: #eff6ff;
+    }
+
+    /* Bảng thông tin chuyển khoản */
+    .bank-info {
+      text-align: left;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 4px 12px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .bank-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .bank-item:last-child {
+      border-bottom: none;
+    }
+    .bank-item-label {
+      color: #64748b;
+      width: 105px;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+    .bank-item-value {
+      flex: 1;
+      font-weight: 600;
+      color: #0f172a;
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 8px;
+      flex-shrink: 0;
+      transition: background-color 0.1s;
+    }
+    .copy-btn.copied {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #166534;
+    }
+
+    .note-text {
+      font-size: 12px;
+      color: #64748b;
+      text-align: left;
+      margin-top: 12px;
+      line-height: 1.5;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+    }
+
+    /* Nút xác nhận thanh toán */
+    .submit-wrap {
+      margin-top: 14px;
+    }
+    .btn-submit {
+      width: 100%;
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+      border-radius: 5px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-submit:active {
+      background: #1e293b;
+    }
+    .btn-submit:disabled {
+      background: #94a3b8;
+      border-color: #94a3b8;
+      cursor: default;
+    }
+    .confirm-alert {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 13px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Chân trang */
+    .site-footer {
+      border-top: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 20px 14px;
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header cuộn bình thường, không cố định -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <div class="brand-title">TECHSTORE VIỆT NAM</div>
+        <span class="brand-sub">Hệ thống phân phối điện thoại chính hãng</span>
+      </div>
+      <div class="header-contact">
+        CSKH: <a href="tel:18002097">1800 2097</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+
+    <!-- Trạng thái đơn -->
+    <div class="status-bar">
+      <div>Mã đơn: <b>#DH-S25-89421</b></div>
+      <div class="status-text">Chờ chuyển khoản</div>
+    </div>
+
+    <!-- Khối sản phẩm & Thông tin người nhận -->
+    <div class="card">
+      <div class="card-header">
+        <span>Chi tiết đơn hàng</span>
+        <span style="font-weight: normal; font-size: 12px; color: #64748b;">18/10/2026 09:30</span>
+      </div>
+      <div class="card-body">
+        
+        <div class="prod-box">
+          <img 
+            src="s25-plus.jpg" 
+            alt="Samsung Galaxy S25 Plus"
+            class="prod-img"
+          />
+          <div class="prod-meta">
+            <div class="prod-name">Samsung Galaxy S25+ 5G (12GB / 256GB) — Likenew 99%</div>
+            <div class="prod-desc">Màu Xám Titan (Marble Gray) • Tình trạng máy đẹp nguyên bản 99% • Kèm củ sạc nhanh 25W và cáp sạc</div>
+            <div class="prod-price">14.600.000 đ</div>
+          </div>
+        </div>
+
+        <div class="meta-list">
+          <div class="meta-row">
+            <span>Người nhận hàng:</span>
+            <span style="font-weight: 500; color: #0f172a;">Gia Khang (0338148702)</span>
+          </div>
+          <div class="meta-row">
+            <span>Địa chỉ giao hàng:</span>
+            <span style="font-weight: 500; color: #0f172a; text-align: right; max-width: 65%;">295 Tân Kỳ Tân Quý, P. Tân Sơn Nhì, TP. Hồ Chí Minh</span>
+          </div>
+          <div class="meta-row">
+            <span>Phí vận chuyển:</span>
+            <span style="color: #16a34a; font-weight: 500;">Miễn phí (Giao 2H)</span>
+          </div>
+          <div class="meta-row total-row">
+            <span>TỔNG TIỀN THANH TOÁN:</span>
+            <span class="total-money">14.600.000 đ</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Khối chuyển khoản VietQR -->
+    <div class="card">
+      <div class="card-header">
+        <span>Chuyển khoản qua VietQR / Napas 247</span>
+      </div>
+      <div class="card-body qr-container">
+        
+        <div class="qr-title">Quét mã QR để thanh toán</div>
+        <div class="qr-subtitle">Mở ứng dụng ngân hàng bất kỳ để quét mã chuyển tiền</div>
+
+        <!-- Ảnh mã QR -->
+        <div class="qr-box">
+          <img 
+            src="qr-techcombank.png" 
+            alt="Mã QR Techcombank LE NGUYEN PHU LOC"
+          />
+          <div>
+            <a 
+              href="qr-techcombank.png" 
+              target="_blank" 
+              download="techcombank_qr_14600000.png"
+              class="qr-save-link"
+            >
+              Lưu ảnh mã QR về máy
+            </a>
+          </div>
+        </div>
+
+        <!-- Thông tin số tài khoản -->
+        <div class="bank-info">
+          <div class="bank-item">
+            <div class="bank-item-label">Ngân hàng:</div>
+            <div class="bank-item-value">Techcombank (Ngân hàng TMCP Kỹ Thương)</div>
+          </div>
+          <div class="bank-item">
+            <div class="bank-item-label">Chủ tài khoản:</div>
+            <div class="bank-item-value">
+              LE NGUYEN PHU LOC
+              <button class="copy-btn" onclick="copyData('LE NGUYEN PHU LOC', this)">Sao chép</button>
+            </div>
+          </div>
+          <div class="bank-item">
+            <div class="bank-item-label">Số tài khoản:</div>
+            <div class="bank-item-value">
+              <span style="font-family: monospace; font-size: 15px;">1903 3789 1750 19</span>
+              <button class="copy-btn" onclick="copyData('19033789175019', this)">Sao chép</button>
+            </div>
+          </div>
+          <div class="bank-item">
+            <div class="bank-item-label">Số tiền:</div>
+            <div class="bank-item-value">
+              14.600.000 đ
+              <button class="copy-btn" onclick="copyData('14600000', this)">Sao chép</button>
+            </div>
+          </div>
+          <div class="bank-item">
+            <div class="bank-item-label">Nội dung CK:</div>
+            <div class="bank-item-value">
+              <span style="font-family: monospace; font-weight: 700;">DH S25 89421</span>
+              <button class="copy-btn" onclick="copyData('DH S25 89421', this)">Sao chép</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-text">
+          <b>Lưu ý:</b> Nhập đúng nội dung chuyển khoản <b>DH S25 89421</b> để hệ thống tự động nhận diện và xuất kho giao hàng.
+        </div>
+
+        <!-- Nút bấm xác nhận -->
+        <div class="submit-wrap">
+          <button class="btn-submit" id="btnSubmit" onclick="confirmTransfer()">
+            Tôi đã hoàn tất chuyển khoản
+          </button>
+          <div class="confirm-alert" id="confirmBox">
+            Đã ghi nhận yêu cầu đối soát. Nhân viên giao hàng sẽ liên hệ trước khi giao máy.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div style="font-weight: 600; color: #334155; margin-bottom: 3px;">CÔNG TY CỔ PHẦN BÁN LẺ KỸ THUẬT SỐ TECHSTORE</div>
+    <div style="margin-bottom: 2px;">Mã số doanh nghiệp: 0108928372 do Sở KH&ĐT TP. Hà Nội cấp</div>
+    <div style="margin-bottom: 2px;">Địa chỉ: 295 Tân Kỳ Tân Quý, Phường Tân Sơn Nhì, TP. Hồ Chí Minh</div>
+    <div>Tổng đài hỗ trợ: 1800 2097 (8h00 - 21h30 hàng ngày)</div>
+  </footer>
+
+  <script>
+    function copyData(text, btn) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      } else {
+        var input = document.createElement("input");
+        document.body.appendChild(input);
+        input.value = text;
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+      if (btn) {
+        var originalText = btn.innerText;
+        btn.innerText = "✓ Đã chép";
+        btn.classList.add("copied");
+        setTimeout(function() {
+          btn.innerText = originalText;
+          btn.classList.remove("copied");
+        }, 1500);
+      }
+    }
+
+    function confirmTransfer() {
+      var btn = document.getElementById("btnSubmit");
+      var box = document.getElementById("confirmBox");
+      btn.innerText = "Đang kiểm tra giao dịch...";
+      btn.disabled = true;
+      box.style.display = "block";
+      setTimeout(function() {
+        window.location.href = "hoa-don-s25.html";
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
